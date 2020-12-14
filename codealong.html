@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codealong - UKE 8 - Adventslys </title>
+
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .litWiks{       
+            margin-left: 33px;
+            margin-right: 11px;
+            height: 10px;
+            width: 5px;
+            background-color: rgb(255, 171, 14);
+            position: relative;
+            float: left;         
+        }
+        .unLit{
+            /* margin-top: 40px; */
+            /* padding-left: 20px; */
+            margin-left: 20px;
+            height: 100px;
+            width: 30px;
+            background-color: blueviolet;
+            float:left;
+        }
+        .wiks{
+            margin-left: 35px;
+            margin-right: 12px;
+            height: 10px;
+            width: 2px;
+            background-color:black;
+            position: relative;
+            float: left;
+
+        }
+        .candleHolder{
+            height: 10px;
+            width: 150px;
+            background-color: red;
+        }
+
+        #app{
+            margin: 50px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        // model
+        let lights = [
+                {lit: false, dato: new Date("Sun Nov 29 2020"),truefunc: isTrue()},
+                {lit: false, dato: new Date("Sun Dec 06 2020")},
+                {lit: false, dato: new Date("Sun Dec 13 2020")},
+                {lit: false, dato: new Date("Sun Dec 20 2020")},
+
+        ];
+        let dato = new Date();
+        let datostring = dato.toDateString();
+        
+
+
+        show();
+        //veiw
+        function show(){
+            let html = "";
+        let candleHolder = "";
+        let wiks = "";
+            for(let light in lights){
+                let wikisLit = lights[light].lit == false ? "wiks" : "litWiks";
+                wiks += `<div class="${wikisLit}"></div>`;
+                html += `<div class="unLit" onclick="litTheLight(${light})"></div>`;
+        
+            }
+            candleHolder = "<div class='candleHolder'></div>";
+
+            document.getElementById("app").innerHTML = wiks + "</br>" + html;
+        }
+        //controller
+        function litTheLight(clickedLight){
+            if( lights[clickedLight].dato <= dato){ 
+            lights[clickedLight].lit = !lights[clickedLight].lit;
+            }
+            show();
+        }
+
+        function isTrue(){
+            return false;
+        }
+
+    </script>
+</body>
+</html>
